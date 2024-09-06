@@ -1,0 +1,2 @@
+hardware_interface.c:13:9:I2C_Write	1
+hardware_interface.c:18:9:I2C_Read	1

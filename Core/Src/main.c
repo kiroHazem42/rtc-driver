@@ -22,6 +22,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "../../Drivers/Device_Drivers/DS1307/DS1307.h"
+#include "hardware_interface.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -45,7 +46,10 @@ I2C_HandleTypeDef hi2c1;
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
-ds1307_t CLK;
+ds1307_t CLK = {
+		.Hardware_Interface_t.I2C_Write = I2C_Write,
+		.Hardware_Interface_t.I2C_Read= I2C_Read,
+};
 uint32_t str[50];
 /* USER CODE END PV */
 
@@ -93,7 +97,7 @@ int main(void) {
 	MX_I2C1_Init();
 	MX_USART1_UART_Init();
 	/* USER CODE BEGIN 2 */
-	if (Ds1307_Init(&CLK, &hi2c1) == DS1307_SUCCESS) {
+	if (Ds1307_Init(&CLK) == DS1307_SUCCESS) {
 		HAL_UART_Transmit(&huart1, "clock ok\n\r", strlen("clock ok\n\r"), 100);
 	} else {
 		HAL_UART_Transmit(&huart1, "clock is not ok\n\r",

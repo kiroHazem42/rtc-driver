@@ -1,0 +1,2 @@
+../Core/Src/hardware_interface.c:13:9:I2C_Write	32	static
+../Core/Src/hardware_interface.c:18:9:I2C_Read	32	static
